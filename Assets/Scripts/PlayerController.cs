@@ -40,8 +40,16 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         
-       xInput = Input.GetAxisRaw("Horizontal");
-       yInput = Input.GetAxisRaw("Vertical");
+       //xInput = Input.GetAxisRaw("Horizontal");
+       //yInput = Input.GetAxisRaw("Vertical");
+
+        if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) ){
+            rb_player.velocity = new Vector2( -moveSpeed, rb_player.velocity.y );
+        }
+        
+        if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) ){
+            rb_player.velocity = new Vector2( moveSpeed, rb_player.velocity.y );
+        }
 
        Debug.DrawRay(transform.position, Vector3.down * 0.8f, Color.red);
 
@@ -55,7 +63,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-       if (Input.GetKeyDown(KeyCode.Space  ) && Grounded || Input.GetKeyDown( KeyCode.UpArrow) && Grounded) 
+       if (Input.GetKeyDown(KeyCode.Space  ) && Grounded && !pegado_status|| Input.GetKeyDown( KeyCode.UpArrow) && Grounded && !pegado_status) 
 
        {
             Jump();
@@ -66,7 +74,7 @@ public class PlayerController : MonoBehaviour
        if(Input.GetKeyDown(KeyCode.E) && !pegado_status && plataforma!=null){
         plataformaPegada=plataforma;
         pegado_status=true;
-       
+        Debug.Log(plataformaPegada.transform.position);
         relative_position= transform.position - plataformaPegada.transform.position;
         transform.position= plataformaPegada.transform.position+ relative_position;
         rb_player.gravityScale =0f;
@@ -75,23 +83,30 @@ public class PlayerController : MonoBehaviour
        else if(Input.GetKeyDown(KeyCode.E) && pegado_status && plataformaPegada!=null){
          plataformaPegada=null;
          pegado_status=false;
+         rb_player.AddForce(Desplazo*15);
          rb_player.gravityScale =1;
 
-         rb_player.AddForce(Desplazo);
+         
+        Debug.Log(Desplazo);
 
        }
-       if(pegado_status== true && plataformaPegada!= null){
-       
-        transform.position= plataformaPegada.transform.position+ relative_position;
-        FindPlatSpeed();
+
+        if(pegado_status== true && plataformaPegada!= null){
+            
+            transform.position= plataformaPegada.transform.position+ relative_position;
+           
+            FindPlatSpeed();
         
        }
+
+       
        
     }
 
     private void FixedUpdate()
     {
-        rb_player.velocity = new Vector2(xInput * moveSpeed, rb_player.velocity.y );
+        //rb_player.velocity = new Vector2(xInput * moveSpeed, rb_player.velocity.y );
+       
     }
 
     private void Jump() 
@@ -103,7 +118,7 @@ public class PlayerController : MonoBehaviour
 
      private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.tag);
+       
         if (other.tag=="MovPlat"){
             plataforma=other;
            
@@ -122,7 +137,8 @@ public class PlayerController : MonoBehaviour
     private void FindPlatSpeed(){
        Desplazo =plataformaPegada.transform.position-PrevPlatPos;
        PrevPlatPos=plataformaPegada.transform.position;
-       Desplazo= Desplazo*Time.deltaTime;
+      
+       Desplazo= Desplazo/Time.deltaTime;
       
     }
 }

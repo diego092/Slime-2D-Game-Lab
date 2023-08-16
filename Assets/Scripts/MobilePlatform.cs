@@ -43,14 +43,14 @@ public class MobilePlatform : MonoBehaviour
             }
             else 
             {
-                nextPlatform -= 1;
+                nextPlatform = 0;
             }
         }
 
         transform.position = Vector2.MoveTowards(transform.position, movementPoints[nextPlatform].position, speedMovement * Time.deltaTime);
     }
 
-    private void OnCollisionEnter2D(Collision2D  other)
+    /*private void OnCollisionEnter2D(Collision2D  other)
     {
         if (other.gameObject.CompareTag("Player")) 
         {
@@ -64,5 +64,5 @@ public class MobilePlatform : MonoBehaviour
         {
             other.transform.SetParent(null);
         }
-    }
+    }*/
 }
