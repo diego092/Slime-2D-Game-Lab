@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
        else if(Input.GetKeyDown(KeyCode.E) && pegado_status && plataformaPegada!=null){
          plataformaPegada=null;
          pegado_status=false;
-         rb_player.gravityScale =1;
+         rb_player.gravityScale = 1;
 
          rb_player.AddForce(Desplazo);
 
@@ -116,13 +116,13 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        plataforma=null;
+        plataforma = null;
     }
     //encontrar la velocidad de la plataforma en la que estas conectado
     private void FindPlatSpeed(){
-       Desplazo =plataformaPegada.transform.position-PrevPlatPos;
-       PrevPlatPos=plataformaPegada.transform.position;
-       Desplazo= Desplazo*Time.deltaTime;
+       Desplazo = plataformaPegada.transform.position - PrevPlatPos;
+       PrevPlatPos = plataformaPegada.transform.position;
+       Desplazo = Desplazo * Time.deltaTime;
       
     }
 }
