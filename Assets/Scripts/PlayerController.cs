@@ -83,9 +83,10 @@ public class PlayerController : MonoBehaviour
        else if(Input.GetKeyDown(KeyCode.E) && pegado_status && plataformaPegada!=null){
          plataformaPegada=null;
          pegado_status=false;
+         transform.position= transform.position+Desplazo*Time.deltaTime;
          rb_player.AddForce(Desplazo*15);
          rb_player.gravityScale =1;
-
+ 
          
         Debug.Log(Desplazo);
 
