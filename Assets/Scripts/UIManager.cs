@@ -7,11 +7,11 @@ using UnityEngine.Audio;
 public class UIManager : MonoBehaviour
 {
     public GameObject optionsPanel;
-    public GameObject settingsPanel;
     public AudioSource clip;
 
     public void OptionsPanel() 
     {
+        Debug.Log("Estoy poniendo en pausa el juego!");
         Time.timeScale = 0f;
         optionsPanel.SetActive(true);
     }
@@ -22,22 +22,6 @@ public class UIManager : MonoBehaviour
         optionsPanel.SetActive(false);
     }
 
-    public void Settings() 
-    {
-        settingsPanel.SetActive(true);
-    }
-
-    public void GoMainMenu() 
-    {
-        SceneManager.LoadScene("MainMenu");
-    }
-
-    public void GoToSettingsMenu() 
-    {
-        SceneManager.LoadScene("Settings");
-    }
-
-    
 
     public void StartGame()
     {
@@ -52,6 +36,7 @@ public class UIManager : MonoBehaviour
 
     public void QuitGame() 
     {
+        Debug.Log("Estoy cerrando el juego!");
         Application.Quit();
     }
 }
