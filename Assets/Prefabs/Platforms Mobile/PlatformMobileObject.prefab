@@ -202,7 +202,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4523294529302060302, guid: c6a77d7cb0370984382bb922772357f7, type: 3}
       propertyPath: m_LocalScale.x
-      value: 4.0368
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4523294529302060302, guid: c6a77d7cb0370984382bb922772357f7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -251,6 +251,38 @@ PrefabInstance:
     - target: {fileID: 6979845998140451228, guid: c6a77d7cb0370984382bb922772357f7, type: 3}
       propertyPath: m_Size.y
       value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6979845998140451228, guid: c6a77d7cb0370984382bb922772357f7, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 3.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6979845998140451228, guid: c6a77d7cb0370984382bb922772357f7, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7360913537035705143, guid: c6a77d7cb0370984382bb922772357f7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a0f0dd0b9d6ef5b4a8f035b61f68b8e7, type: 3}
+    - target: {fileID: 7360913537035705143, guid: c6a77d7cb0370984382bb922772357f7, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7360913537035705143, guid: c6a77d7cb0370984382bb922772357f7, type: 3}
+      propertyPath: m_Color.b
+      value: 0.3035915
+      objectReference: {fileID: 0}
+    - target: {fileID: 7360913537035705143, guid: c6a77d7cb0370984382bb922772357f7, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7360913537035705143, guid: c6a77d7cb0370984382bb922772357f7, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7360913537035705143, guid: c6a77d7cb0370984382bb922772357f7, type: 3}
+      propertyPath: m_DrawMode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7581766451052215435, guid: c6a77d7cb0370984382bb922772357f7, type: 3}
       propertyPath: m_Name
