@@ -100,9 +100,21 @@ public class PlayerController : MonoBehaviour
         pegado_status=true;
         Debug.Log(plataformaPegada.transform.position);
         relative_position= transform.position - plataformaPegada.transform.position;
+        if (relative_position.x>2){
+            relative_position.x=2;
+        }
+        else if (relative_position.x<-2){
+            relative_position.x=-2;
+        }
+        if (relative_position.y>1){
+            relative_position.y=1;
+        }
+        else if(relative_position.y<-1){
+            relative_position.y=-1;
+        }
         transform.position= plataformaPegada.transform.position+ relative_position;
         rb_player.gravityScale =0f;
-
+        SoundMaker.PlayOneShot(LandSound);
        }
        else if(Input.GetKeyDown(KeyCode.E) && pegado_status && plataformaPegada!=null){
          plataformaPegada=null;
@@ -151,15 +163,19 @@ public class PlayerController : MonoBehaviour
             plataforma=other;
            
         }
-        else
+        /*else
         {
             plataforma=null;
-        }
+        }*/
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        plataforma=null;
+        if (other.tag=="MovPlat"){
+            plataforma=null;
+           
+        }
+       
     }
     //encontrar la velocidad de la plataforma en la que estas conectado
     private void FindPlatSpeed(){
