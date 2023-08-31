@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DamageObject : MonoBehaviour
 {
@@ -9,6 +10,13 @@ public class DamageObject : MonoBehaviour
         if (collision.transform.CompareTag("Player")) 
         {
             Destroy(collision.gameObject);
+            LoadSameScene();
         }
+    }
+
+    public void LoadSameScene() 
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 }

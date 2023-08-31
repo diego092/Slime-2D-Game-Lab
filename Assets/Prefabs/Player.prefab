@@ -202,7 +202,7 @@ MonoBehaviour:
   SoundMaker: {fileID: 5613111578108486774}
   rb_player: {fileID: 4890384036195193783}
   moveSpeed: 5
-  jumpForce: 50
+  jumpForce: 60
 --- !u!50 &4890384036195193783
 Rigidbody2D:
   serializedVersion: 4
