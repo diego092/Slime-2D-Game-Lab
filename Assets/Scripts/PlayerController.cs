@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
         
         if(!FallingComplete && anim.GetCurrentAnimatorStateInfo(0).IsName("f_fall_Clip")){
             anim.SetBool("FallCompleted",false);
-            StartCoroutine(DelayCambio(anim.GetCurrentAnimatorStateInfo(0).length));
+           
             FallingComplete=true;
             anim.SetBool("FallCompleted",true);
         }
@@ -109,6 +109,7 @@ public class PlayerController : MonoBehaviour
                
                 SoundMaker.PlayOneShot(LandSound); //tocar sonido cuando no estes grounded y tocas el piso
             }
+            anim.SetBool("JumpStart",false);
             Grounded = true; 
             
        }
@@ -123,7 +124,8 @@ public class PlayerController : MonoBehaviour
             
             SoundMaker.PlayOneShot(JumpSound); //tocar sonido
             anim.SetBool("JumpStart",true);
-            DelayCambio(anim.GetCurrentAnimatorStateInfo(0).length);
+            
+            Jump();
             Debug.Log("animacion terminada");
             
             
@@ -188,9 +190,9 @@ public class PlayerController : MonoBehaviour
 
     private void Jump() 
     {
-        if(anim.GetBool("JumpStart")){
+      
             rb_player.AddForce(Vector2.up * jumpForce);
-        }
+        
         
     }
 
@@ -226,13 +228,15 @@ public class PlayerController : MonoBehaviour
       
     }
     IEnumerator DelayCambio(float delay=0){
+       
         yield return new WaitForSeconds(delay);
-        Jump();
+        
         anim.SetBool("JumpStart",false);
          
        
         
     }
+    
     
    /* private bool Grounded(){
         return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1);
