@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1165369936563929629}
   - component: {fileID: 6786380430606486290}
   - component: {fileID: 5613111578108486774}
+  - component: {fileID: 1115275160050876386}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -31,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 1344774740035353789}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 74.19822, y: 3.324772, z: 0}
+  m_LocalPosition: {x: 74.19822, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -78,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1006821697, guid: 27d7e74ea9ee48842b1d466cb483a377, type: 3}
+  m_Sprite: {fileID: 8115796458661450725, guid: 976ce4e86bf6dd540a31f0ea66d1b1f6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -107,9 +108,16 @@ MonoBehaviour:
   LandSound: {fileID: 8300000, guid: c055d9865af0e6d4e98de9eb690b6d7d, type: 3}
   WalkSound: {fileID: 8300000, guid: 6d4e3e304d61a4d45b97f8fe2b2cd544, type: 3}
   SoundMaker: {fileID: 5613111578108486774}
+  anim: {fileID: 1115275160050876386}
+  Sprite: {fileID: 7747707057001621277}
+  groundCheckTransform: {fileID: 5398854630908004410}
+  groundCheckRadius: 0.1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
   rb_player: {fileID: 4890384036195193783}
   moveSpeed: 5
-  jumpForce: 60
+  jumpForce: 75
 --- !u!50 &4890384036195193783
 Rigidbody2D:
   serializedVersion: 4
@@ -169,7 +177,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.01705581}
+  m_Offset: {x: 0, y: 0.45}
   serializedVersion: 2
   m_Radius: 0.43339628
 --- !u!58 &6786380430606486290
@@ -204,7 +212,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.44}
   serializedVersion: 2
   m_Radius: 1
 --- !u!82 &5613111578108486774
@@ -303,3 +311,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &1115275160050876386
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344774740035353789}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
