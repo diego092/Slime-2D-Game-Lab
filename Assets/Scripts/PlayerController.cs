@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-       if (Input.GetKeyDown(KeyCode.Space  ) &&(Grounded || coyote>0) && !pegado_status || Input.GetKeyDown( KeyCode.UpArrow) && (Grounded || coyote>0)  && !pegado_status && coyote>0) 
+       if (Input.GetKeyDown(KeyCode.W  ) &&(Grounded || coyote>0) && !pegado_status || Input.GetKeyDown( KeyCode.UpArrow) && (Grounded || coyote>0)  && !pegado_status && coyote>0) 
 
        {
             SoundMaker.PlayOneShot(JumpSound); //tocar sonido
@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
 
        //codigo para pegarse con E
 
-       if(Input.GetKeyDown(KeyCode.E) && !pegado_status && plataforma!=null){
+       if(Input.GetKeyDown(KeyCode.Space) && !pegado_status && plataforma!=null){
         plataformaPegada=plataforma;
         pegado_status=true;
         Debug.Log(plataformaPegada.transform.position);
@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
         rb_player.gravityScale =0f;
 
        }
-       else if(Input.GetKeyDown(KeyCode.E) && pegado_status && plataformaPegada!=null){
+       else if(Input.GetKeyDown(KeyCode.Space) && pegado_status && plataformaPegada!=null){
          plataformaPegada=null;
          pegado_status=false;
          transform.position= transform.position+Desplazo*Time.deltaTime;
