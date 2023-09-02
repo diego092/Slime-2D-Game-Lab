@@ -122,8 +122,11 @@ public class PlayerController : MonoBehaviour
        {
             
             SoundMaker.PlayOneShot(JumpSound); //tocar sonido
+            anim.SetBool("JumpStart",true);
+            DelayCambio(anim.GetCurrentAnimatorStateInfo(0).length);
+            Debug.Log("animacion terminada");
             
-            Jump();
+            
             
             
             
@@ -185,8 +188,10 @@ public class PlayerController : MonoBehaviour
 
     private void Jump() 
     {
+        if(anim.GetBool("JumpStart")){
+            rb_player.AddForce(Vector2.up * jumpForce);
+        }
         
-        rb_player.AddForce(Vector2.up * jumpForce);
     }
 
     //chequear si hay alguna plataforma pegable alrededor del jugador
@@ -222,8 +227,13 @@ public class PlayerController : MonoBehaviour
     }
     IEnumerator DelayCambio(float delay=0){
         yield return new WaitForSeconds(delay);
+        Jump();
+        anim.SetBool("JumpStart",false);
+         
+       
         
     }
+    
    /* private bool Grounded(){
         return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1);
     }*/
