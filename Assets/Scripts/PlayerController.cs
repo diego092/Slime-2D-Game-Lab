@@ -132,7 +132,7 @@ public class PlayerController : MonoBehaviour
             
        }
 
-       //codigo para pegarse con E
+       //codigo para pegarse con Space
 
        if(Input.GetKeyDown(KeyCode.Space) && !pegado_status && plataforma!=null){
         plataformaPegada=plataforma;
