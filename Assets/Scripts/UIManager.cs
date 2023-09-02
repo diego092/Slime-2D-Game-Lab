@@ -34,6 +34,10 @@ public class UIManager : MonoBehaviour
         clip.Play();
     }
 
+    public void GoToMainMenu() 
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
     public void QuitGame() 
     {
         Debug.Log("Estoy cerrando el juego!");
