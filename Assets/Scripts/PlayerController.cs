@@ -13,12 +13,16 @@ public class PlayerController : MonoBehaviour
     private Vector3 relative_position; //posicion relativa entre el jugador y la plataforma a la que esta pegado
     private Vector3 PrevPlatPos; //posicion del frame anterior de la plataforma
     private Vector3 Desplazo; //espacio transportado por la plataforma entre un frame y el siguiente
-    private int coyote=60;
+    private int coyote=20;
     public AudioClip JumpSound; //sonido del salto
     public AudioClip LandSound; //sonido cuando te pegas con el piso
     public AudioClip WalkSound; //sonido de caminar
     public AudioSource SoundMaker; //componente que hace el sonido
     private bool walkLoop;
+    public Animator anim;
+    public SpriteRenderer Sprite;
+    private bool FallingComplete=false;
+    
 
     [SerializeField] private Rigidbody2D rb_player;
 
@@ -39,22 +43,46 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+    
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+       
+        
         if (!Grounded){
             coyote= coyote-1;
+            anim.SetBool("OnAir",true);
         }
+        else{
+           
+            coyote=20;
+            anim.SetBool("OnAir",false);
+      
+        }
+        
+        if(!FallingComplete && anim.GetCurrentAnimatorStateInfo(0).IsName("f_fall_Clip")){
+            anim.SetBool("FallCompleted",false);
+            StartCoroutine(DelayCambio(anim.GetCurrentAnimatorStateInfo(0).length));
+            FallingComplete=true;
+            anim.SetBool("FallCompleted",true);
+        }
+        if(FallingComplete){
+            FallingComplete=false;
+        }
+        
        //xInput = Input.GetAxisRaw("Horizontal");
        //yInput = Input.GetAxisRaw("Vertical");
        walkLoop= !SoundMaker.isPlaying && Grounded;//hago que walkloop solo sea true cuando no haya un sonido y estes en el piso
         
-
+        if (!pegado_status){
+             anim.SetFloat("HorizontalMovement",rb_player.velocity.x);
+             anim.SetFloat("VerticalMovement",rb_player.velocity.y);
+        }
         if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) ){
             rb_player.velocity = new Vector2( -moveSpeed, rb_player.velocity.y );
+            Sprite.flipX=true;
             if(walkLoop){
                 SoundMaker.PlayOneShot(WalkSound);
             }
@@ -62,6 +90,7 @@ public class PlayerController : MonoBehaviour
         
         if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) ){
             rb_player.velocity = new Vector2( moveSpeed, rb_player.velocity.y );
+            Sprite.flipX=false;
             if(walkLoop){
                 SoundMaker.PlayOneShot(WalkSound);
             } 
@@ -70,27 +99,34 @@ public class PlayerController : MonoBehaviour
             rb_player.velocity = new Vector2( 0, rb_player.velocity.y );
         }
 
-       Debug.DrawRay(transform.position, Vector3.down * 0.8f, Color.red);
+       Debug.DrawRay(transform.position, Vector3.down * 1f, Color.red);
 
-       if (Physics2D.Raycast(transform.position, Vector3.down, 0.8f)) 
+        
+       if (Physics2D.Raycast(transform.position, Vector3.down, 1f)==true) 
        {
+
             if (Grounded==false && !SoundMaker.isPlaying){
+               
                 SoundMaker.PlayOneShot(LandSound); //tocar sonido cuando no estes grounded y tocas el piso
             }
             Grounded = true; 
+            
        }
        else 
         {
             Grounded= false;
         }
 
-
+        
        if (Input.GetKeyDown(KeyCode.W  ) &&(Grounded || coyote>0) && !pegado_status || Input.GetKeyDown( KeyCode.UpArrow) && (Grounded || coyote>0)  && !pegado_status && coyote>0) 
-
        {
+            
             SoundMaker.PlayOneShot(JumpSound); //tocar sonido
+            
             Jump();
-            coyote=0;
+            
+            
+            
        }
 
        //codigo para pegarse con E
@@ -142,15 +178,14 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Grounded){
-            coyote=60;
-        }
+       
         //rb_player.velocity = new Vector2(xInput * moveSpeed, rb_player.velocity.y );
        
     }
 
     private void Jump() 
     {
+        
         rb_player.AddForce(Vector2.up * jumpForce);
     }
 
@@ -185,4 +220,11 @@ public class PlayerController : MonoBehaviour
        Desplazo= Desplazo/Time.deltaTime;
       
     }
+    IEnumerator DelayCambio(float delay=0){
+        yield return new WaitForSeconds(delay);
+        
+    }
+   /* private bool Grounded(){
+        return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1);
+    }*/
 }
