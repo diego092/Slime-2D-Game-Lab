@@ -110,11 +110,6 @@ MonoBehaviour:
   SoundMaker: {fileID: 5613111578108486774}
   anim: {fileID: 1115275160050876386}
   Sprite: {fileID: 7747707057001621277}
-  groundCheckTransform: {fileID: 5398854630908004410}
-  groundCheckRadius: 0.1
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
   rb_player: {fileID: 4890384036195193783}
   moveSpeed: 5
   jumpForce: 75
@@ -321,7 +316,7 @@ Animator:
   m_GameObject: {fileID: 1344774740035353789}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0945888f5c939984da6ac21d62d55758, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
