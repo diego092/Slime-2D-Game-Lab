@@ -15304,6 +15304,10 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 0.8
       objectReference: {fileID: 0}
+    - target: {fileID: 1228012249542240647, guid: 4f2409e983f7e98448b24aba10e50817, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3541050484720915989, guid: 4f2409e983f7e98448b24aba10e50817, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -15372,9 +15376,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4876093530556802593, guid: 4f2409e983f7e98448b24aba10e50817, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924821469656700067, guid: 4f2409e983f7e98448b24aba10e50817, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7451261092489806912, guid: 4f2409e983f7e98448b24aba10e50817, type: 3}
       propertyPath: m_Name
       value: PlatformMobileObject 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451261092489806912, guid: 4f2409e983f7e98448b24aba10e50817, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 9100771538098757912, guid: 4f2409e983f7e98448b24aba10e50817, type: 3}
       propertyPath: m_LocalScale.x

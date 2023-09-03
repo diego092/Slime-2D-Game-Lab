@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     private float yInput;
 
     //Booleans
-    private bool Grounded;
+    //private bool Grounded;
     private void Awake()
     {
         Rigidbody2D rb_player = GetComponent<Rigidbody2D>();
@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
     {   
        
         
-        if (!Grounded){
+        if (!CheckGround.isGrounded){
             coyote= coyote-1;
             anim.SetBool("OnAir",true);
         }
@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
         
        //xInput = Input.GetAxisRaw("Horizontal");
        //yInput = Input.GetAxisRaw("Vertical");
-       walkLoop= !SoundMaker.isPlaying && Grounded;//hago que walkloop solo sea true cuando no haya un sonido y estes en el piso
+       walkLoop= !SoundMaker.isPlaying && CheckGround.isGrounded;//hago que walkloop solo sea true cuando no haya un sonido y estes en el piso
         
         if (!pegado_status){
              anim.SetFloat("HorizontalMovement",rb_player.velocity.x);
@@ -99,27 +99,27 @@ public class PlayerController : MonoBehaviour
             rb_player.velocity = new Vector2( 0, rb_player.velocity.y );
         }
 
-       Debug.DrawRay(transform.position, Vector3.down * 1f, Color.red);
+       //Debug.DrawRay(transform.position, Vector3.down * 1f, Color.red);
 
-        
-       if (Physics2D.Raycast(transform.position, Vector3.down, 1f)==true) 
+        //Ver si esto es correcto, tanto el sonido como la animación
+       if (CheckGround.isGrounded ==true) 
        {
 
-            if (Grounded==false && !SoundMaker.isPlaying){
+            if (CheckGround.isGrounded ==false && !SoundMaker.isPlaying){
                
                 SoundMaker.PlayOneShot(LandSound); //tocar sonido cuando no estes grounded y tocas el piso
             }
             anim.SetBool("JumpStart",false);
-            Grounded = true; 
+            CheckGround.isGrounded = true; 
             
        }
        else 
         {
-            Grounded= false;
+            CheckGround.isGrounded = false;
         }
 
         
-       if (Input.GetKeyDown(KeyCode.W  ) &&(Grounded || coyote>0) && !pegado_status || Input.GetKeyDown( KeyCode.UpArrow) && (Grounded || coyote>0)  && !pegado_status && coyote>0) 
+       if (Input.GetKeyDown(KeyCode.W  ) &&(CheckGround.isGrounded || coyote>0) && !pegado_status || Input.GetKeyDown( KeyCode.UpArrow) && (CheckGround.isGrounded || coyote>0)  && !pegado_status && coyote>0) 
        {
             
             SoundMaker.PlayOneShot(JumpSound); //tocar sonido
