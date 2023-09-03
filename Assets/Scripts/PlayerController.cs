@@ -175,7 +175,7 @@ public class PlayerController : MonoBehaviour
            
             FindPlatSpeed();
         
-       }
+        }
 
        
        

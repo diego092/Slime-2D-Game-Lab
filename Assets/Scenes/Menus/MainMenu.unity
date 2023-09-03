@@ -480,6 +480,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4401331038555237232, guid: a9bac8a05c989e34f904a3c756ae85bf, type: 3}
+      propertyPath: m_text
+      value: Slime Stick
+      objectReference: {fileID: 0}
     - target: {fileID: 5688325833011587483, guid: a9bac8a05c989e34f904a3c756ae85bf, type: 3}
       propertyPath: m_Name
       value: Canvas
