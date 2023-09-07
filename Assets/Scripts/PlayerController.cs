@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class PlayerController : MonoBehaviour
 {
@@ -23,6 +25,7 @@ public class PlayerController : MonoBehaviour
     public SpriteRenderer Sprite;
     private bool FallingComplete=false;
     
+
 
     [SerializeField] private Rigidbody2D rb_player;
 
@@ -101,7 +104,7 @@ public class PlayerController : MonoBehaviour
 
        //Debug.DrawRay(transform.position, Vector3.down * 1f, Color.red);
 
-        //Ver si esto es correcto, tanto el sonido como la animación
+        //Ver si esto es correcto, tanto el sonido como la animaciï¿½n
        if (CheckGround.isGrounded ==true) 
        {
 
@@ -134,14 +137,26 @@ public class PlayerController : MonoBehaviour
             
        }
 
-       //codigo para pegarse con Space
+        if (pegado_status == true && plataformaPegada != null)
+        {
 
-       if(Input.GetKeyDown(KeyCode.Space) && !pegado_status && plataforma!=null){
-        plataformaPegada=plataforma;
-        pegado_status=true;
-        Debug.Log(plataformaPegada.transform.position);
-        relative_position= transform.position - plataformaPegada.transform.position;
-        if (relative_position.x>2){
+            transform.position = plataformaPegada.transform.position + relative_position;
+
+            FindPlatSpeed();
+
+        }
+        //codigo para pegarse con Space
+
+
+        if (Input.GetKeyDown(KeyCode.Space) && !pegado_status && plataforma!=null){
+
+            plataformaPegada=plataforma;
+            pegado_status=true;
+            Debug.Log(plataformaPegada.transform.position);
+            relative_position= transform.position - plataformaPegada.transform.position;
+            
+
+            if (relative_position.x>2){
             relative_position.x=2;
         }
         else if (relative_position.x<-2){
@@ -153,14 +168,19 @@ public class PlayerController : MonoBehaviour
         else if(relative_position.y<-1){
             relative_position.y=-1;
         }
-        transform.position= plataformaPegada.transform.position+ relative_position;
+            float angle = Vector3.SignedAngle(Vector3.forward, relative_position, Vector3.up);
+
+            Debug.Log(angle);
+            transform.position= plataformaPegada.transform.position+ relative_position;
         rb_player.gravityScale =0f;
         SoundMaker.PlayOneShot(LandSound);
-       }
+            anim.SetBool("Pegado", true);
+        }
        else if(Input.GetKeyDown(KeyCode.Space) && pegado_status && plataformaPegada!=null){
          plataformaPegada=null;
          pegado_status=false;
-         transform.position= transform.position+Desplazo*Time.deltaTime;
+         anim.SetBool("Pegado", false);
+         transform.position= transform.position+(Desplazo*Time.deltaTime)*20;
          rb_player.AddForce(Desplazo*15);
          rb_player.gravityScale =1;
  
@@ -169,14 +189,7 @@ public class PlayerController : MonoBehaviour
 
        }
 
-        if(pegado_status== true && plataformaPegada!= null){
-            
-            transform.position= plataformaPegada.transform.position+ relative_position;
-           
-            FindPlatSpeed();
-        
-        }
-
+       
        
        
     }
@@ -236,9 +249,10 @@ public class PlayerController : MonoBehaviour
        
         
     }
-    
-    
-   /* private bool Grounded(){
-        return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1);
-    }*/
+
+
+    /* private bool Grounded(){
+         return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1);
+     }*/
 }
+
