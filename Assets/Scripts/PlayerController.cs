@@ -156,19 +156,21 @@ public class PlayerController : MonoBehaviour
             relative_position= transform.position - plataformaPegada.transform.position;
             
 
-            if (relative_position.x>2){
-            relative_position.x=2;
+            if (relative_position.x>1.5f){
+            relative_position.x=1.5f;
         }
-        else if (relative_position.x<-2){
-            relative_position.x=-2;
+        else if (relative_position.x<-1.5f){
+            relative_position.x=-1.5f;
         }
-        if (relative_position.y>1){
-            relative_position.y=1;
+        if (relative_position.y>0.4f){
+            relative_position.y=0.4f;
         }
-        else if(relative_position.y<-1){
-            relative_position.y=-1;
+        else if(relative_position.y<-0.4f){
+            relative_position.y=-0.4f;
         }
-            float angle = Vector3.SignedAngle(Vector3.forward, relative_position, Vector3.up);
+            var angle = Mathf.Atan2(relative_position.y, relative_position.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle-90, Vector3.forward);
+
 
             Debug.Log(angle);
             transform.position= plataformaPegada.transform.position+ relative_position;
@@ -183,9 +185,10 @@ public class PlayerController : MonoBehaviour
          transform.position= transform.position+(Desplazo*Time.deltaTime)*20;
          rb_player.AddForce(Desplazo*15);
          rb_player.gravityScale =1;
- 
-         
-        Debug.Log(Desplazo);
+            transform.rotation = Quaternion.AngleAxis(0, Vector3.forward);
+
+
+            Debug.Log(Desplazo);
 
        }
 
